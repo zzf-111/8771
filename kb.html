@@ -722,7 +722,7 @@ function showFileHint(){
   grid.innerHTML = '<div class="empty-state"><div class="empty-icon">💡</div>'
     + '<div class="empty-title">此版本需要本地服务器</div>'
     + '<div class="empty-sub">数据已拆分为独立文件，浏览器不允许 file:// 直接读取。<br>请在 <b>E:\\工作台\\B站知识库</b> 目录启动：</div>'
-    + '<div style="margin:10px 0;font-family:monospace;background:var(--bg2,#f3f4f6);padding:10px 14px;border-radius:8px">python start_server.py<br>然后访问 http://localhost:8787/kb.html</div>'
+    + '<div style="margin:10px 0;font-family:monospace;background:var(--bg2,#f3f4f6);padding:12px 14px;border-radius:8px;line-height:1.9;text-align:left">① 双击同目录的 <b>start.bat</b>（一键启动）<br>② 或命令行：<b>python -m http.server 8788</b><br>③ 浏览器打开 <b>http://localhost:8788/kb.html</b></div>'
     + '<div class="empty-actions"><button class="ghost" onclick="location.reload()">↻ 刷新重试</button></div></div>';
   hideLoadBar();
 }
