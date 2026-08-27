@@ -9,6 +9,11 @@
 !kb.html
 !start_server.py
 
+# data 分片目录（重构版数据按来源拆分，含 BGE 向量）
+!data/
+data/*
+!data/chunks_*.json
+
 # search 目录
 !search/
 search/*
