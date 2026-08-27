@@ -679,7 +679,7 @@ function loadAllShards(){
   if(_shardPromise) return _shardPromise;
   var i = 0;
   function next(){
-    if(i >= SHARDS.length){ KB_READY = true; updateLoadBar(); return Promise.resolve(); }
+    if(i >= SHARDS.length) return Promise.resolve();
     var sh = SHARDS[i++];
     return fetch('data/' + sh.file).then(function(r){
       if(!r.ok) throw new Error('HTTP ' + r.status + ' (' + sh.file + ')');
@@ -693,7 +693,10 @@ function loadAllShards(){
       return next();
     });
   }
-  _shardPromise = next();
+  // 并发 4 条流水线（浏览器同域连接限制内最大化吞吐）
+  var workers = [];
+  for(var w=0; w<4 && w<SHARDS.length; w++){ workers.push(next()); }
+  _shardPromise = Promise.all(workers).then(function(){ KB_READY = true; updateLoadBar(); });
   return _shardPromise;
 }
 function ensureLoaded(){
