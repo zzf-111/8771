@@ -675,6 +675,7 @@ var KB_READY = false;
 var SHARDS = KB.shards || [];
 var _shardPromise = null;
 var _loadedCnt = 0;
+var _searchWait = false;
 function loadAllShards(){
   if(_shardPromise) return _shardPromise;
   var i = 0;
@@ -1070,8 +1071,8 @@ function cardHTML(it, delayStyle){
 
 function render(){
   if(!KB_READY && (state.q || state.mode==='sem')){
-    ensureLoaded().then(function(){ render(); });
-    return;
+    if(!_searchWait){ _searchWait = true; toast('数据加载中（' + _loadedCnt + '/' + SHARDS.length + '），先显示当前结果，加载完自动补全…'); }
+    ensureLoaded().then(function(){ _searchWait = false; render(); });
   }
   KB_LIST = buildList();
   RENDERED = 0;
