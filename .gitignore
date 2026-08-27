@@ -1,0 +1,15 @@
+# ==================== 白名单：只保留核心文件 ====================
+# 忽略所有文件和目录
+*
+
+# 但不忽略这些（必须先让父目录不被忽略）
+!/
+!.gitignore
+!index.html
+!kb.html
+!start_server.py
+
+# search 目录
+!search/
+search/*
+!search/kb_search.html
